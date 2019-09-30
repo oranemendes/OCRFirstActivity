@@ -1,6 +1,7 @@
 package com.example.ocrfirstactivity;
 
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.text.Html;
 import android.view.LayoutInflater;
@@ -19,6 +20,11 @@ import java.util.List;
 
 class MyFakeNewsAdapter extends RecyclerView.Adapter<MyFakeNewsAdapter.MyViewHolder> {
     private final List<FakeNews> list = FakeNewsList.all;
+    private Context context;
+
+    public MyFakeNewsAdapter(Context c){
+        context = c;
+    }
 
     @Override
     public int getItemCount() {
@@ -30,12 +36,6 @@ class MyFakeNewsAdapter extends RecyclerView.Adapter<MyFakeNewsAdapter.MyViewHol
     public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater inflater = LayoutInflater.from(parent.getContext());
         final View view = inflater.inflate(R.layout.list_article, parent, false);
-        view.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(view.getContext(), WebViewActivity.class);
-            }
-        });
         return new MyViewHolder(view);
     }
 
@@ -48,42 +48,31 @@ class MyFakeNewsAdapter extends RecyclerView.Adapter<MyFakeNewsAdapter.MyViewHol
     public class MyViewHolder extends RecyclerView.ViewHolder {
 
         private final TextView title;
-        private WebView htmlContent;
+        private final TextView htmlContent;
         private FakeNews current;
 
         public MyViewHolder(final View itemView) {
             super(itemView);
 
             title = (TextView) itemView.findViewById(R.id.title);
-            htmlContent = (WebView) itemView.findViewById(R.id.htmlContent);
+            htmlContent = (TextView) itemView.findViewById(R.id.htmlContent);
+
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    //Intent intent = new Intent(itemView.getContext(), WebViewActivity.class);
-                    //view.getContext().startActivity(intent);
-                    itemView.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View view) {
-                            new AlertDialog.Builder(itemView.getContext())
-                                    .setTitle(current.title)
-                                    .setMessage(current.htmlContent)
-                                    .show();
-                        }
-                    });
+                    Intent intent = new Intent(context, WebViewActivity.class);
+                    intent.putExtra("article", current.htmlContent);
+                    intent.putExtra("title", current.title);
+                    context.startActivity(intent);
+
                 }
 
-                public void display(FakeNews fakeNews) {
-                    current = fakeNews;
-                    title.setText(Html.fromHtml(fakeNews.title));
-                    // htmlContent.loadData(String.valueOf(htmlContent), "text/html; charset=UTF-8", null);
-                }
             });
         }
 
         public void display(FakeNews pair) {
             current = pair;
             title.setText(Html.fromHtml(pair.title));
-//            htmlContent.loadData(String.valueOf(htmlContent), "text/html; charset=UTF-8", null);
         }
     }
 }

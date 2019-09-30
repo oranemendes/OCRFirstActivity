@@ -27,7 +27,7 @@ public class MainActivity extends AppCompatActivity {
 
         final RecyclerView mRecyclerView = (RecyclerView) findViewById(R.id.recyclerviewarticle);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
-        mRecyclerView.setAdapter(new MyFakeNewsAdapter());
+        mRecyclerView.setAdapter(new MyFakeNewsAdapter(this));
 
     }
 }

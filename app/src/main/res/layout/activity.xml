@@ -4,10 +4,11 @@
     android:orientation="vertical"
     android:background="@color/colorPrimary"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    tools:context=".WebViewActivity">
 
     <WebView
-        android:id="@+id/htmlContent"
+        android:id="@+id/htmlContentWebView"
         android:layout_width="412dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"

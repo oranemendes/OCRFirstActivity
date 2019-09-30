@@ -1,5 +1,6 @@
 package com.example.ocrfirstactivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
@@ -14,13 +15,14 @@ public class WebViewActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity);
 
-        setTitle(this.getTitle());
+        Intent intent = getIntent();
+        String title = intent.getStringExtra("title");
+        String article = intent.getStringExtra("article");
 
-        WebView webView = (WebView) findViewById(R.id.htmlContent);
-        webView.loadData(getIntent().getStringExtra("htmlContent"), "text/html; charset=UTF-8", null);
-       // webView.loadUrl("file:///android_asset/news.xml");
-       // webView.setWebViewClient(new WebViewClient(){
-        //    public boolean shouldOverrideUrlLoading(WebView viewx, String urlx)
+        setTitle(title);
+
+        WebView webView = (WebView) findViewById(R.id.htmlContentWebView);
+        webView.loadData(article, "text/html; charset=UTF-8", null);
 
     }
 
