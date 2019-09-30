@@ -3,15 +3,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="#CDDC39"
     android:orientation="vertical">
 
     <TextView
         android:id="@+id/title"
+        style="@style/MainLayout"
         android:layout_width="412dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
-        android:layout_marginBottom="15dp"
         android:paddingLeft="10dp"
         android:paddingRight="10dp"
         android:scrollbars="vertical"
@@ -23,11 +22,19 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
-        android:layout_marginBottom="15dp"
-        android:paddingLeft="10dp"
-        android:paddingRight="10dp"
+        android:layout_marginBottom="0dp"
         android:ellipsize="end"
         android:lines="2"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
         android:textAppearance="?android:attr/textAppearanceSmall"
+        android:visibility="invisible"
         tools:text="Description"></TextView>
+
+    <View
+        android:id="@+id/divider"
+        android:layout_width="match_parent"
+        android:layout_height="3dp"
+        android:background="?android:attr/listDivider"
+        android:scrollbarStyle="insideInset"/>
 </LinearLayout>
